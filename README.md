@@ -121,4 +121,4 @@ For security reasons, organizations may prevent running .bat scripts. Therefore,
 ## 👥 Authors
 
 - [@Anuj Khandelwal](https://www.github.com/anujonthemove)
-
+- [@Prakhar Agarwal](https://github.com/prakhar19)
