@@ -28,7 +28,8 @@
 # ``shelve``, ``marshal``, ``anydbm``, & ``bsddb``
 # (among others).
 
-# Below has been taken from: https://gist.github.com/motss/199ceb253f27904cff41eef75aac2fae
+# Below has been taken from: 
+# https://gist.github.com/motss/199ceb253f27904cff41eef75aac2fae
 
 # Automatically normalize line endings for all text-based files
 # http://git-scm.com/docs/gitattributes#_end_of_line_conversion
