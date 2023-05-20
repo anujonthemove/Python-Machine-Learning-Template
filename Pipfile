@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+scipy = "*"
+matplotlib = "*"
+pandas = "*"
+seaborn = "*"
+scikit-learn = "*"
+
+[dev-packages]
+python-decouple = "*"
+flake8 = "*"
+flake8-tabs = "*"
+mypy = "*"
+pre-commit = "*"
+isort = "*"
+black = {extras = ["jupyter"], version = "*"}
+pdoc3 = "*"
+mkdocs = "*"
