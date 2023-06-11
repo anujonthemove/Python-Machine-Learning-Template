@@ -19,7 +19,7 @@ The Python Machine Learning Template is designed to provide a comprehensive stru
 
 To get started, simply click on the above button 👆 or <b><font color="red">"Use this template"</font></b> button at the top and create your project based on this template. 
 
-<a href="https://www.anujonthemove.com/The-Template-Project/"><img src="/home/acer/workspace/personal/github/Python-Machine-Learning-Template/.assets/images/check-detailed-documentation-here.svg" alt="click this button to use the template"></a>
+<a href="https://www.anujonthemove.com/The-Template-Project/"><img src="https://raw.githubusercontent.com/anujonthemove/Python-Machine-Learning-Template/main/.assets/images/check-detailed-documentation-here.svg" alt="check detailed documentation here"></a>
 
 </div>
 
