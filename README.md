@@ -48,7 +48,7 @@ The following sections provide an overview of the directory structure and instru
 ├── .pre-commit-config.yaml  <- 🔧 Config file for Git Hooks
 ├── LICENSE                  <- 🪧 License file [choose your appropriate license from GitHub]
 ├── mkdocs.yml               <- 🗞️ Base config file required for Mkdocs
-├── Pipfile			           <- 🗃️ Most commonly used ML python packages
+├── Pipfile		     <- 🗃️ Most commonly used ML python packages
 ├── project_setup.bat        <- 📜 Project script for Windows OS
 ├── project_setup.sh         <- 📜 Project script for Linux/MacOS
 ├── README.md                <- 📝 Project readme
@@ -61,7 +61,7 @@ The following sections provide an overview of the directory structure and instru
 
 * 🤓 Simple, intuitive, yet comprehensive directory structure for organizing your machine learning project.
 
-* 😎 Setup script provided for Windows, Mac, and Linux.  Check [Setup](#setup) section for more details.
+* 😎 Setup script provided for Windows, Mac, and Linux.  Check [Setup](#%EF%B8%8F-setup) section for more details.
 
 * 🤗 Only requires native Python and Virtual Environment package installed.
 
