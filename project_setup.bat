@@ -68,6 +68,7 @@ IF "%should_exit%"=="true" (
 IF "%clear_readme%"=="true" (
     call :clear_readme_file || exit /b 1
 ) ELSE IF "%install%"=="true" (
+    call :clean_repo || exit /b 1
     call :create_env_file || exit /b 1
     call :create_virtual_environment || exit /b 1
     call :activate_virtual_environment || exit /b 1
@@ -197,4 +198,19 @@ if "%use_proxy%"=="true" (
     pipenv install --dev
     set PIPENV_DONT_LOAD_ENV=
 )
+exit /b
+
+:clean_repo
+echo "Cleaning repository..."
+
+REM Check if the .assets directory exists before removing it
+if exist ".assets" (
+    rmdir /s /q ".assets"
+)
+
+REM Check if the CONTRIBUTING.md file exists before removing it
+if exist "CONTRIBUTING.md" (
+    del /f "CONTRIBUTING.md"
+)
+
 exit /b
