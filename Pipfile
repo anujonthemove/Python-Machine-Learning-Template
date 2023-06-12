@@ -13,7 +13,6 @@ scikit-learn = "*"
 jupyter = "*"
 jupyter-server = "*"
 ipython = {extras = ["all"], version = "*"}
-tensorflow = "*"
 
 [dev-packages]
 python-decouple = "*"
