@@ -160,66 +160,100 @@ The following sections provide an overview of the directory structure and instru
 <details>
 <summary><h3> 🪟 On Windows OS</h3></summary>
 
-For Windows, the setup instructions are largely the same except for one additional argument.
+### 🧑‍💻 Steps:
 
-### Steps:
+   1. Open CMD and navigate to your project directory.
 
-1. Open CMD and navigate to your project directory
+   2. Run the `project_setup.bat` script using the following commands:
 
-2. Run the script using the source command as follows:
+      ```
+      project_setup.bat [OPTIONS]
+      ```
 
-   ```
-   project_setup.bat [OPTIONS]
-   ```
+      Replace [OPTIONS] with any combination of the following options:
 
-   Replace [OPTIONS] with any combination of the options provided:
+      * `--install`: **Required argument**. If nothing is passed, a help message is displayed.
+      
+      * `--install-dev`: Optional argument. Pass this flag along with `--install` flag to install development packages.
+      
+      * `--use-proxy`: Optional argument. This flag enables installation of python packages behind proxy. Check Using .env section for proxy configuration.
+      
+      * `--clear-readme`: Optional argument. Clear README.md file after setting up the project.
+         * 📣 ***Caution: Use this only when you are setting up the project for the first time.***
 
-   * `--install`: This is a **required** argumen to install base packages.
-   * `--use-proxy`: If you are working behind a proxy, enable proxy for pip installations. Check 
-   * `--install-dev`: Install development packages.
-   * `--clear-readme`: Clear README.md file.
-   * `--help`: Display the help message.
+      * `--remove-cache`: Optional argument. Removes `pip` and `pipenv` cache files.
+         * 💡 ***Use this to clear cache files generated during package installation***
 
-   For example, you can run the script with multiple options like this:
+      * `--help`: Display the help message.
 
-   ```
-   project_setup.bat --install --install-dev --use-proxy
+      <details>
+         <summary> <h4> Command usage </h4> </summary>
+         You can run the setup script with multiple options like this:
+
+         * Install base packages
+
+         ```
+         project_setup.bat --install
+         ```
+
+         * Install base packages behind proxy
+
+         ```
+         project_setup.bat --install --use-proxy
+         ```
+
+         * Install development packages:
+
+         ```
+         project_setup.bat --install --install-dev
+         ```
+
+         * Install development packages behind proxy:
+
+         ```
+         project_setup.bat --install --install-dev --use-proxy
+         ```
+
+         * Replace contents of the README.md with the name of your project:
+
+         ```
+         project_setup.bat --clear-readme
+         ``` 
+         
+         * Remove `pip` and `pipenv` cache from your system:
+         ```
+         project_setup.bat --remove-cache
+         ``` 
+
+      </details>
+
+
+   #### 📝 Important Note 
+   *  ✅ To ensure a conflict-free environment setup, it is strongly recommended to always run the `project_setup.bat` script to create a virtual environment for your project.
    
-   ```
+   *  ❗For security reasons, organizations may prevent running .bat scripts on PowerShell. You should run the script **ONLY** on Command Prompt (CMD) to ensure that everything runs without any errors.
 
-3. The script will perform the necessary setup steps based on the provided options:
+   *  ⛔ Ideally, you should see a `.venv` virtual environment already activated in the Command Prompt (CMD). However, if it's not activated, please follow these steps to activate it before installing any package using `pipenv`:
 
-   * It will create a virtual environment named `.venv` if it doesn't already exist.
-   * It will activate the virtual environment.
-   * It will install all development packages from Pipefile if the `--install-dev` option is provided.
-   * If the `--clear-readme` option is provided, it will prompt you to clear the README.md file so that you can write your own for the project.
+      1. Open the Command Prompt (CMD).
+      2. Navigate to the project directory.
+      3. Activate the virtual environment by running the following command:
 
+         `.venv\Scripts\Activate`
 
-⛔ Ideally, you should see a `.venv` virtual environment already activated in the Command Prompt (CMD). However, if it's not activated, please follow these steps to activate it before installing any package using `pipenv`:
+         This command will activate the virtual environment and change your prompt to indicate that you're now working within it.
 
-1. Open the Command Prompt (CMD).
-2. Navigate to the project directory.
-3. Activate the virtual environment by running the following command:
+      4. You can now proceed with installing packages using `pipenv` or running other commands within the activated virtual environment.
 
-   `.venv\Scripts\Activate`
+   * For Windows users, it's important to note that proxy settings made through editing the environment variables `$HTTP_PROXY` and `$HTTPS_PROXY` require elevated permissions.
 
-   This command will activate the virtual environment and change your prompt to indicate that you're now working within it.
-
-4. You can now proceed with installing packages using `pipenv` or running other commands within the activated virtual environment.
-
-#### 📝 Note:
-
-* For security reasons, organizations may prevent running .bat scripts. Therefore, avoid using PowerShell to execute the script.
-
-* For Windows users, it's important to note that proxy settings made through editing the environment variables `$HTTP_PROXY` and `$HTTPS_PROXY` require elevated permissions.
-
-* To simplify handling proxy url for every pip install, you can now utilize `Pipenv`. Pipenv automatically reads the environment variables and incorporates them into your project.
+   * To simplify handling proxy url for every pip install, you can now utilize `Pipenv`. Pipenv automatically reads the environment variables and incorporates them into your project.
 
 </details>
 
 
 ## 📦 Packages
-All the packages to be installed are included in the Pipfile.
+All the packages to be installed are included in the Pipfile and should **ONLY** using `pipenv`.
 
 <details> 
 <summary> <h3> Base Packages </h3> </summary>
@@ -254,8 +288,6 @@ All the packages to be installed are included in the Pipfile.
 * mkdocs                       <- Generate Project documentation for Python projects
 ```
 </details>
-
-### Installation instructions for additional package installation
 
 ## 👥 Authors
 
