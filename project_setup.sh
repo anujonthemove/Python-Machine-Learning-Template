@@ -134,9 +134,9 @@ clear_pipenv_cache() {
         echo
         echo "🧽 Attempting to clean pipenv cache"
         echo
-        pipenv --clear || { echo "❌ Failed to install development packages (using proxy)"; return 1; }
+        pipenv --clear || { echo "❌ Failed to clear cache"; return 1; }
         echo
-        echo "🧹 Pipenv cache cleared"
+        echo "🧹 Pip cache cleared"
 
 }
 
