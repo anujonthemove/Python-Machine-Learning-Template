@@ -15,7 +15,7 @@
 The Python Machine Learning Template is designed to provide a comprehensive structure for end-to-end **Machine Learning** projects in Python. Whether you're working on ***Computer Vision***, ***Natural Language Processing***, ***Reinforcement Learning***, or ***traditional Machine Learning/Data Science***, this template offers a simple and intuitive way to organize and manage your project.
 
 
-<a href="https://github.com/anujonthemove/Python-Machine-Learning-Template/generate"><img src="https://raw.githubusercontent.com/anujonthemove/Python-Machine-Learning-Template/main/.assets/images/do-not-fork-use-this-template-message.svg" alt="click this button to use the template"></a>
+<a href="https://github.com/anujonthemove/Python-Machine-Learning-Template/generate"><img src="https://raw.githubusercontent.com/anujonthemove/Python-Machine-Learning-Template/main/.assets/images/do-not-clone_fork-click-this-button-to-use-the-template.svg" alt="click this button to use the template"></a>
 
 To get started, simply click on the above button 👆 or <b><font color="red">"Use this template"</font></b> button at the top and create your project based on this template. 
 
