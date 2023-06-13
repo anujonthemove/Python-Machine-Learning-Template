@@ -4,6 +4,7 @@ REM Project Setup Script
 REM
 REM Author: Anuj Khandelwal
 REM Date: 30-05-2023
+REM Last Modified: 12-06-2023
 REM Contact: anujonthemove@gmail.com
 REM
 REM Description:
@@ -12,10 +13,11 @@ REM installing dependencies, and performing other project-specific actions.
 REM
 REM Usage:
 REM - Pass any of the following boolean arguments in any order:
+REM   --install        : Required. Installs base packages
+REM   --install-dev    : Works along with --install option. Installs development packages.
 REM   --use-proxy      : Sets the 'use_proxy' flag to true.
-REM   --install-dev    : Sets the 'install_dev' and 'install' flags to true.
 REM   --clear-readme   : Sets the 'clear_readme' flag to true.
-REM   --install        : Sets the 'install' flag to true.
+REM   --remove-cache   : Removes pip and pipenv cache files.
 REM   --help           : Displays help information and exits.
 REM
 REM - The script executes different functions based on the arguments passed:
@@ -25,7 +27,11 @@ REM     'upgrade_pip', and optionally 'install_dev_packages' if '--install-dev' 
 REM   - Otherwise, displays help information.
 
 REM Load environment variables from .env file
-for /F "usebackq delims=" %%A in (".env") do set %%A
+if exist .env (
+    for /F "usebackq delims=" %%A in (".env") do set %%A
+)
+
+
 
 REM Initialize variables
 set use_proxy=false
@@ -33,14 +39,16 @@ set install_dev=false
 set clear_readme=false
 set should_exit=false
 set install=false
+set remove_cache=false
 
 REM Process command line arguments
 for %%x in (%*) do (
     IF "%%x"=="--use-proxy" (
         set use_proxy=true
+    ) ELSE IF "%%x"=="--remove-cache" (
+        set remove_cache=true
     ) ELSE IF "%%x"=="--install-dev" (
         set install_dev=true
-        set install=true
     ) ELSE IF "%%x"=="--clear-readme" (
         set clear_readme=true
     ) ELSE IF "%%x"=="--install" (
@@ -67,6 +75,8 @@ IF "%should_exit%"=="true" (
 :main
 IF "%clear_readme%"=="true" (
     call :clear_readme_file || exit /b 1
+) ELSE IF "%remove_cache%" == "true" (
+    call :remove_cache || exit /b 1
 ) ELSE IF "%install%"=="true" (
     call :clean_repo || exit /b 1
     call :create_env_file || exit /b 1
@@ -74,6 +84,7 @@ IF "%clear_readme%"=="true" (
     call :activate_virtual_environment || exit /b 1
     call :upgrade_pip || exit /b 1
     call :install_base_packages || exit /b 1
+    call :remove_cache || exit /b 1
     IF "%install_dev%"=="true" (
         call :install_dev_packages || exit /b 1
     )
@@ -89,12 +100,12 @@ echo "Displaying help..."
 REM Help content here
 echo script.bat [OPTIONS]
 echo Options:
-echo   --install           Run the script to set up Python Virtual Environment
-echo                       and install dependencies
-echo   --install-dev       Install development packages
+echo   --install           Install base packages
+echo   --install-dev       Install development packages along with base packages. Pass it along with --install
+echo   --use-proxy         Enable proxy for pip installations
 echo   --clear-readme      Clear README.md file
-echo   --use-proxy         Use proxy settings for pip installations
-echo   --help              Display this help message
+echo   --remove-cache      Remove pip and pipenv cache
+echo   --help              Display help message
 
 exit /b
 
@@ -212,5 +223,20 @@ REM Check if the CONTRIBUTING.md file exists before removing it
 if exist "CONTRIBUTING.md" (
     del /f "CONTRIBUTING.md"
 )
+
+exit /b
+
+:remove_cache
+
+echo.
+echo "Attempting to clean pipenv cache"
+echo.
+pipenv --clear || (
+    echo "Failed to clear cache"
+    exit /b 1
+)
+echo.
+echo "Pip cache cleared"
+
 
 exit /b
