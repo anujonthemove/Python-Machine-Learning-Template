@@ -240,3 +240,15 @@ echo "Pip cache cleared"
 
 
 exit /b
+
+:install_precommit
+
+echo.
+echo "Installing pre-commit"
+echo.
+pre-commit install || (
+    echo "Failed to install pre-commit"
+    exit /b 1
+)
+
+exit /b 1
