@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+pre-commit = "*"
 numpy = "*"
 scipy = "*"
 matplotlib = "*"
@@ -19,7 +20,6 @@ python-decouple = "*"
 flake8 = "*"
 flake8-tabs = "*"
 mypy = "*"
-pre-commit = "*"
 isort = "*"
 black = {extras = ["jupyter"], version = "*"}
 pdoc3 = "*"
