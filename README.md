@@ -49,7 +49,7 @@ The following sections provide an overview of the directory structure and instru
 ├── .pre-commit-config.yaml  <- 🔧 Config file for Git Hooks
 ├── LICENSE                  <- 🪧 License file [choose your appropriate license from GitHub]
 ├── mkdocs.yml               <- 🗞️ Base config file required for Mkdocs
-├── Pipfile		     <- 🗃️ Most commonly used ML python packages
+├── Pipfile		              <- 🗃️ Most commonly used python packages
 ├── project_setup.bat        <- 📜 Project script for Windows OS
 ├── project_setup.sh         <- 📜 Project script for Linux/MacOS
 ├── README.md                <- 📝 Project readme
