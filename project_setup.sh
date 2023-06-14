@@ -112,6 +112,14 @@ install_packages() {
     fi
 }
 
+install_precommit() {
+    echo
+    echo "✨ Installing pre-commit"
+    echo
+    pre-commit install || { echo "❌ Failed to install pre-commit"; return 1; }
+    echo
+}
+
 # Function to install dev packages using pipenv
 install_dev_packages() {
     
@@ -280,6 +288,7 @@ main() {
             echo "❌ Not installing development packages"
             echo
         fi
+        install_precommit || return 1
         clear_pipenv_cache || return 1
     else
         display_help
