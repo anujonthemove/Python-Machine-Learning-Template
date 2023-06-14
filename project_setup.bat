@@ -84,6 +84,7 @@ IF "%clear_readme%"=="true" (
     call :activate_virtual_environment || exit /b 1
     call :upgrade_pip || exit /b 1
     call :install_base_packages || exit /b 1
+    call :install_precommit || exit /b 1
     call :remove_cache || exit /b 1
     IF "%install_dev%"=="true" (
         call :install_dev_packages || exit /b 1
@@ -240,6 +241,7 @@ echo "Pip cache cleared"
 
 
 exit /b
+
 
 :install_precommit
 
