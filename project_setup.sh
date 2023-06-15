@@ -13,6 +13,7 @@
 #######################################################
 
 # Helper functions
+
 # Function to create .env file from .env-template file
 create_env_file() {
     if [ -f ".env-template" ] && [ ! -f ".env" ]; then
@@ -59,6 +60,7 @@ unset_proxy() {
         unset HTTPS_PROXY
         unset HTTP_PROXY
     fi
+    export PIPENV_DONT_LOAD_ENV=1
 }
 
 # Function to upgrade .venv python-pip
@@ -112,14 +114,6 @@ install_packages() {
     fi
 }
 
-install_precommit() {
-    echo
-    echo "✨ Installing pre-commit"
-    echo
-    pre-commit install || { echo "❌ Failed to install pre-commit"; return 1; }
-    echo
-}
-
 # Function to install dev packages using pipenv
 install_dev_packages() {
     
@@ -135,6 +129,14 @@ install_dev_packages() {
         PIPENV_DONT_LOAD_ENV=1 pipenv install --dev || { echo "❌ Failed to install development packages"; return 1; }
     fi
 
+}
+
+install_precommit() {
+    echo
+    echo "✨ Installing pre-commit"
+    echo
+    pre-commit install || { echo "❌ Failed to install pre-commit"; return 1; }
+    echo
 }
 
 
@@ -175,18 +177,6 @@ clear_readme_file() {
     fi
 }
 
-# Function to display help in red color
-display_help() {
-    echo -e "\e[1m\e[31mUsage: source your_script.sh [OPTIONS]\e[0m"
-    echo -e "\e[1m\e[31mOptions:\e[0m"
-    echo -e "  \e[1m\e[31m--install       ⏳ Install base packages\e[0m"
-    echo -e "  \e[1m\e[31m--install-dev   ⌛ Install development packages along with base packages\e[0m"
-    echo -e "  \e[1m\e[31m--use-proxy     🔒 Enable proxy for pip installations\e[0m"
-    echo -e "  \e[1m\e[31m--clear-readme  📜 Clear README.md file\e[0m"
-    echo -e "  \e[1m\e[31m--remove-cache  💾 Remove pip and pipenv cache\e[0m"
-    echo -e "  \e[1m\e[31m--help          🆘 Display help message\e[0m"
-}
-
 # Function to clean the repository
 clean_repo() {
     echo
@@ -210,6 +200,19 @@ clean_repo() {
     fi
 }
 
+# Function to display help in red color
+display_help() {
+    echo -e "\e[1m\e[31mUsage: source your_script.sh [OPTIONS]\e[0m"
+    echo -e "\e[1m\e[31mOptions:\e[0m"
+    echo -e "  \e[1m\e[31m--install       ⏳ Install base packages\e[0m"
+    echo -e "  \e[1m\e[31m--install-dev   ⌛ Install development packages along with base packages\e[0m"
+    echo -e "  \e[1m\e[31m--use-proxy     🔐 Enable proxy for python package installation\e[0m"
+    echo -e "  \e[1m\e[31m--unset-proxy   🔓 Disable proxy for python package installation\e[0m"
+    echo -e "  \e[1m\e[31m--clear-readme  📜 Clear README.md file\e[0m"
+    echo -e "  \e[1m\e[31m--remove-cache  💾 Remove pip and pipenv cache\e[0m"
+    echo -e "  \e[1m\e[31m--help          🆘 Display help message\e[0m"
+}
+
 
 # Check command line arguments
 use_proxy=false
@@ -218,9 +221,13 @@ clear_readme=false
 should_exit=false
 install=false
 remove_cache=false
+no_proxy=false
 
 while [ $# -gt 0 ]; do
     case "$1" in
+        --unset-proxy)
+            no_proxy=true
+            ;;
         --remove-cache)
             remove_cache=true
             ;;
@@ -266,7 +273,10 @@ main() {
 
     elif [ "$remove_cache" = true ]; then
         clear_pipenv_cache || return 1
-        echo "Removing cache"
+        
+    elif [ "$no_proxy" = true ]; then
+        unset_proxy || return 1
+        
     elif [ "$install" = true ]; then
         echo 
         echo "---------------------------------------------"
@@ -283,12 +293,13 @@ main() {
         install_packages || return 1
         if [ "$install_dev" = true ]; then
             install_dev_packages || return 1
+            install_precommit || return 1
         else
             echo 
             echo "❌ Not installing development packages"
             echo
         fi
-        install_precommit || return 1
+        
         clear_pipenv_cache || return 1
     else
         display_help
