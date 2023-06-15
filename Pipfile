@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pre-commit = "*"
 numpy = "*"
 scipy = "*"
 matplotlib = "*"
@@ -16,6 +15,7 @@ jupyter-server = "*"
 ipython = {extras = ["all"], version = "*"}
 
 [dev-packages]
+pre-commit = "*"
 python-decouple = "*"
 flake8 = "*"
 flake8-tabs = "*"
