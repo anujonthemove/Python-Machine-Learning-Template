@@ -77,183 +77,207 @@ The following sections provide an overview of the directory structure and instru
 
 ## 🛠️ Setup
 
+Project setup scripts have been provided separately for Linux/MacOS and Windows OS. Overall commands are as follows:
+
 <details>
-<summary><h3> 🐧 On Linux/MacOS </h3></summary>
+<summary> <h3> Command details </h3> </summary>
 
-### 🧑‍💻 Steps:
+   ```
+   ## For Linux/MacOS
+   source project_setup.sh [OPTIONS] 
 
-   1. Open terminal and navigate to your project directory.
+   or 
 
-   2. Run the `project_setup.sh` script using the following commands:
+   ## For Windows OS
+   project_setup.bat [OPTIONS]
+   ```
 
-      ```
-      source project_setup.sh [OPTIONS]
-      ```
+   Replace [OPTIONS] with any combination of the following options:
 
-      Replace [OPTIONS] with any combination of the following options:
-
-      * `--install`: **Required argument**. If nothing is passed, a help message is displayed.
-      
-      * `--install-dev`: Optional argument. Pass this flag along with `--install` flag to install development packages.
-      
-      * `--use-proxy`: Optional argument. This flag enables installation of python packages behind proxy. Check Using .env section for proxy configuration.
-      
-      * `--clear-readme`: Optional argument. Clear README.md file after setting up the project.
-         * 📣 ***Caution: Use this only when you are setting up the project for the first time.***
-
-      * `--remove-cache`: Optional argument. Removes `pip` and `pipenv` cache files.
-         * 💡 ***Use this to clear cache files generated during package installation***
-
-      * `--help`: Display the help message.
-
-      <details>
-         <summary> <h4> Command usage </h4> </summary>
-         You can run the setup script with multiple options like this:
-
-         * Install base packages
-
-         ```
-         source project_setup.sh --install
-         ```
-
-         * Install base packages behind proxy
-
-         ```
-         source project_setup.sh --install --use-proxy
-         ```
-
-         * Install development packages:
-
-         ```
-         source project_setup.sh --install --install-dev
-         ```
-
-         * Install development packages behind proxy:
-
-         ```
-         source project_setup.sh --install --install-dev --use-proxy
-         ```
-
-         * Replace contents of the README.md with the name of your project:
-
-         ```
-         source project_setup.sh --clear-readme
-         ``` 
-         
-         * Remove `pip` and `pipenv` cache from your system:
-         ```
-         source project_setup.sh --remove-cache
-         ``` 
-
-      </details>
-
-
-   #### 📝 Important Note 
-   *  ✅ To ensure a conflict-free environment setup, it is strongly recommended to always run the `project_setup.sh` script to create a virtual environment for your project.
+   * `--install`: **Required argument**. If nothing is passed, a help message is displayed.
    
-   *  ❗You should run the script **ONLY** using the `source` command to ensure that the virtual environment `.venv` is automatically activated at the end of setup in the current shell session.
+   * `--install-dev`: Optional argument. Pass this flag along with `--install` flag to install development packages.
+   
+   * `--use-proxy`: Optional argument. This flag enables installation of python packages behind proxy. Check Using .env section for proxy configuration.
+   
+   * `--unset-proxy`: Optional argument. This flag disables proxy.
 
+   * `--clear-readme`: Optional argument. Clear README.md file after setting up the project.
+      * 📣 ***Caution: Use this only when you are setting up the project for the first time.***
+
+   * `--remove-cache`: Optional argument. Removes `pip` and `pipenv` cache files.
+      * 💡 ***Use this to clear cache files generated during package installation***
+
+   * `--help`: Display the help message.
 
 </details>
 
 
 <details>
-<summary><h3> 🪟 On Windows OS</h3></summary>
+<summary><h3> 🐧 Instructions for Linux/MacOS </h3></summary>
+
+For setting up the project, `project_setup.sh` script has been provided along with some options.
+
+
 
 ### 🧑‍💻 Steps:
 
-   1. Open CMD and navigate to your project directory.
+1. Open terminal and navigate to your project directory.
 
-   2. Run the `project_setup.bat` script using the following commands:
-
-      ```
-      project_setup.bat [OPTIONS]
-      ```
-
-      Replace [OPTIONS] with any combination of the following options:
-
-      * `--install`: **Required argument**. If nothing is passed, a help message is displayed.
-      
-      * `--install-dev`: Optional argument. Pass this flag along with `--install` flag to install development packages.
-      
-      * `--use-proxy`: Optional argument. This flag enables installation of python packages behind proxy. Check Using .env section for proxy configuration.
-      
-      * `--clear-readme`: Optional argument. Clear README.md file after setting up the project.
-         * 📣 ***Caution: Use this only when you are setting up the project for the first time.***
-
-      * `--remove-cache`: Optional argument. Removes `pip` and `pipenv` cache files.
-         * 💡 ***Use this to clear cache files generated during package installation***
-
-      * `--help`: Display the help message.
-
-      <details>
-         <summary> <h4> Command usage </h4> </summary>
-         You can run the setup script with multiple options like this:
-
-         * Install base packages
-
-         ```
-         project_setup.bat --install
-         ```
-
-         * Install base packages behind proxy
-
-         ```
-         project_setup.bat --install --use-proxy
-         ```
-
-         * Install development packages:
-
-         ```
-         project_setup.bat --install --install-dev
-         ```
-
-         * Install development packages behind proxy:
-
-         ```
-         project_setup.bat --install --install-dev --use-proxy
-         ```
-
-         * Replace contents of the README.md with the name of your project:
-
-         ```
-         project_setup.bat --clear-readme
-         ``` 
-         
-         * Remove `pip` and `pipenv` cache from your system:
-         ```
-         project_setup.bat --remove-cache
-         ``` 
-
-      </details>
-
-
-   #### 📝 Important Note 
-   *  ✅ To ensure a conflict-free environment setup, it is strongly recommended to always run the `project_setup.bat` script to create a virtual environment for your project.
+   **Case (a): Setting up in _Development_ environment** 
    
-   *  ❗For security reasons, organizations may prevent running .bat scripts on PowerShell. You should run the script **ONLY** on Command Prompt (CMD) to ensure that everything runs without any errors.
+      If you are setting up the project inside **development** environment, use:
 
-   *  ⛔ Ideally, you should see a `.venv` virtual environment already activated in the Command Prompt (CMD). However, if it's not activated, please follow these steps to activate it before installing any package using `pipenv`:
+      ```
+         source project_setup.sh --install --install-dev
+      ```
 
-      1. Open the Command Prompt (CMD).
-      2. Navigate to the project directory.
-      3. Activate the virtual environment by running the following command:
+      Incase you are working behind a proxy, use the following command instead:
+         
+      ```
+         source project_setup.sh --install --install-dev --use-proxy
+      ```
+   
 
-         `.venv\Scripts\Activate`
+   **Case (b): If you are setting up the project in _production_ environment**, 
+   
+      If you are setting up the project inside **production** environment, you may only require base packages to be installaed, use:
 
-         This command will activate the virtual environment and change your prompt to indicate that you're now working within it.
+      ```
+         source project_setup.sh --install
+      ```
 
-      4. You can now proceed with installing packages using `pipenv` or running other commands within the activated virtual environment.
+      If you are working behind a proxy, use the following command:
+      
+      ```
+         source project_setup.sh --install --use-proxy
+      ```
 
-   * For Windows users, it's important to note that proxy settings made through editing the environment variables `$HTTP_PROXY` and `$HTTPS_PROXY` require elevated permissions.
+2. If you are setting up the project first time using this template, then you should replace contents of the README.md with the name of your project:
 
-   * To simplify handling proxy url for every pip install, you can now utilize `Pipenv`. Pipenv automatically reads the environment variables and incorporates them into your project.
+   ```
+   source project_setup.sh --clear-readme
+   ``` 
+   
+   ***Use this command only once in the development environment. DO NOT run this once you write your own readme. Also, do not run this in production environment.***
+
+
+
+#### 📝 Important Note 
+
+*  For any other package installation apart from the listed packages in `Pipfile` use `pipenv` as follows:
+
+   ```
+   pipenv install package_name
+   ```
+
+   By default, `pipenv` loads all the `.env` variables, therefore you need to unset the proxy first if you are not behind proxy.
+
+   Use the following command:
+
+   ```
+   source project_setup.sh --unset-proxy
+   ```
+   You should then be able to install packages using pipenv as stated above.
+
+*  During package installation, the packages are downloaded and cached. This consumes a lot of disk, hence you should clear pip and pipenv cache from time to time. Use the following command:
+
+   ```
+   source project_setup.sh --remove-cache
+   ``` 
+
+
+*  ✅ To ensure a conflict-free environment setup, it is strongly recommended to always run the `project_setup.sh` script to create a virtual environment for your project.
+
+*  ❗You should run the script **ONLY** using the `source` command to ensure that the virtual environment `.venv` is automatically activated at the end of setup in the current shell session.
+
+
+</details>
+<details>
+
+<summary><h3> 🪟 Instructions for Windows OS</h3></summary>
+
+
+For setting up the project, `project_setup.bat` script has been provided along with some options.
+
+
+### 🧑‍💻 Steps:
+
+1. Open Command Prompt (CMD) and navigate to your project directory.
+
+   **Case (a): Setting up in _Development_ environment** 
+   
+      If you are setting up the project inside **development** environment, use:
+
+      ```
+      project_setup.bat --install --install-dev
+      ```
+
+      Incase you are working behind a proxy, use the following command instead:
+         
+      ```
+      project_setup.bat --install --install-dev --use-proxy
+      ```
+   
+
+   **Case (b): If you are setting up the project in _production_ environment**, 
+   
+      If you are setting up the project inside **production** environment, you may only require base packages to be installaed, use:
+
+      ```
+      project_setup.bat --install
+      ```
+
+      If you are working behind a proxy, use the following command:
+      
+      ```
+      project_setup.bat --install --use-proxy
+      ```
+
+2. If you are setting up the project first time using this template, then you should replace contents of the README.md with the name of your project:
+
+   ```
+   project_setup.bat --clear-readme
+   ``` 
+   
+   ***Use this command only once in the development environment. DO NOT run this once you write your own readme. Also, do not run this in production environment.***
+
+
+
+#### 📝 Important Note 
+
+*  For any other package installation apart from the listed packages in `Pipfile` use `pipenv` as follows:
+
+   ```
+   pipenv install package_name
+   ```
+
+   By default, `pipenv` loads all the `.env` variables, therefore you need to unset the proxy first if you are not behind proxy.
+
+   Use the following command:
+
+   ```
+   project_setup.bat --unset-proxy
+   ```
+   You should then be able to install packages using pipenv as stated above.
+
+*  During package installation, the packages are downloaded and cached. This consumes a lot of disk, hence you should clear pip and pipenv cache from time to time. Use the following command:
+
+   ```
+   project_setup.bat --remove-cache
+   ``` 
+
+*  ✅ To ensure a conflict-free environment setup, it is strongly recommended to always run the `project_setup.bat` script to create a virtual environment for your project.
+
+*  ❗For security reasons, organizations may prevent running .bat scripts on PowerShell. You should run the script **ONLY** on Command Prompt (CMD) to ensure that everything runs without any errors.
+
+
 
 </details>
 
 
 ## 📦 Packages
-All the packages to be installed are included in the Pipfile and should **ONLY** using `pipenv`.
+All the packages to be installed are included in the Pipfile. For installing additional packages **ONLY** `pipenv` should be used.
 
 <details> 
 <summary> <h3> Base Packages </h3> </summary>
