@@ -77,7 +77,14 @@ The following sections provide an overview of the directory structure and instru
 
 ## 🛠️ Setup
 
-Project setup scripts have been provided separately for Linux/MacOS and Windows OS. Overall commands are as follows:
+Project setup scripts have been provided separately for Linux/MacOS and Windows OS. 
+
+Checkout the demo quick setup.
+
+### 🎥 Demo
+
+[![asciicast](https://asciinema.org/a/aLntFu3A4w0JWivMfXLzfVvCv.svg)](https://asciinema.org/a/aLntFu3A4w0JWivMfXLzfVvCv)
+
 
 <details>
 <summary> <h3> Command details </h3> </summary>
@@ -117,7 +124,6 @@ Project setup scripts have been provided separately for Linux/MacOS and Windows 
 <summary><h3> 🐧 Instructions for Linux/MacOS </h3></summary>
 
 For setting up the project, `project_setup.sh` script has been provided along with some options.
-
 
 
 ### 🧑‍💻 Steps:
