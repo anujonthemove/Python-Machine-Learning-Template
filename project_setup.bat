@@ -27,6 +27,11 @@ REM     'upgrade_pip', and optionally 'install_dev_packages' if '--install-dev' 
 REM   - Otherwise, displays help information.
 
 REM Load environment variables from .env file
+@REM if exist .env (
+@REM     for /F "usebackq delims=" %%A in (".env") do set %%A
+@REM )
+
+REM Load environment variables from .env file
 if exist .env (
     for /F "usebackq delims=" %%A in (".env") do set %%A
 )
@@ -40,11 +45,14 @@ set clear_readme=false
 set should_exit=false
 set install=false
 set remove_cache=false
+set no_proxy=false
 
 REM Process command line arguments
 for %%x in (%*) do (
     IF "%%x"=="--use-proxy" (
         set use_proxy=true
+    ) ELSE IF "%%x"=="--unset-proxy" (
+        set no_proxy=true
     ) ELSE IF "%%x"=="--remove-cache" (
         set remove_cache=true
     ) ELSE IF "%%x"=="--install-dev" (
@@ -75,6 +83,8 @@ IF "%should_exit%"=="true" (
 :main
 IF "%clear_readme%"=="true" (
     call :clear_readme_file || exit /b 1
+) ELSE IF "%no_proxy%" == "true" (
+    call :unset_proxy || exit /b 1
 ) ELSE IF "%remove_cache%" == "true" (
     call :remove_cache || exit /b 1
 ) ELSE IF "%install%"=="true" (
@@ -84,10 +94,11 @@ IF "%clear_readme%"=="true" (
     call :activate_virtual_environment || exit /b 1
     call :upgrade_pip || exit /b 1
     call :install_base_packages || exit /b 1
-    call :install_precommit || exit /b 1
+    
     call :remove_cache || exit /b 1
     IF "%install_dev%"=="true" (
         call :install_dev_packages || exit /b 1
+        call :install_precommit || exit /b 1
     )
 ) ELSE (
     call :display_help
@@ -103,7 +114,8 @@ echo script.bat [OPTIONS]
 echo Options:
 echo   --install           Install base packages
 echo   --install-dev       Install development packages along with base packages. Pass it along with --install
-echo   --use-proxy         Enable proxy for pip installations
+echo   --use-proxy         Enable proxy for python package installation
+echo   --unset-proxy       Disable proxy for python package installation
 echo   --clear-readme      Clear README.md file
 echo   --remove-cache      Remove pip and pipenv cache
 echo   --help              Display help message
@@ -165,11 +177,10 @@ REM Logic to upgrade pip here
 
 if "%use_proxy%"=="true" (
     echo "USING PROXY"
-    echo "ENV VAR: %HTTPS_PROXY%"
+    echo "HTTP_PROXY: %HTTP_PROXY%"
     python -m pip install --no-cache-dir --upgrade pip --proxy %HTTP_PROXY%
 ) else (
-    echo "NOT USING PROXY"
-    echo "ENV VAR: %HTTPS_PROXY%"
+    echo "Not using proxy"
     set "HTTPS_PROXY="
     set "HTTP_PROXY="
     python -m pip install --upgrade pip
@@ -182,11 +193,11 @@ echo "Installing base packages..."
 REM Logic to install base packages here
 
 if "%use_proxy%"=="true" (
-    echo "USING PROXY"
-    echo "ENV VAR: %HTTPS_PROXY%"
+    echo "Using proxy"
+    echo "HTTP_PROXY: %HTTP_PROXY%"
     pipenv install 
 ) else (
-    echo "NOT USING PROXY"
+    echo "Not using proxy"
     set PIPENV_DOTENV_LOCATION=.env
     set PIPENV_DONT_LOAD_ENV=1
     pipenv install 
@@ -200,11 +211,11 @@ echo "Installing dev packages..."
 REM Logic to install dev packages here
 
 if "%use_proxy%"=="true" (
-    echo "USING PROXY"
-    echo "ENV VAR: %HTTPS_PROXY%"
+    echo "Using proxy"
+    echo "HTTP_PROXY: %HTTP_PROXY%"
     pipenv install --dev
 ) else (
-    echo "NOT USING PROXY"
+    echo "Not using proxy"
     set PIPENV_DOTENV_LOCATION=.env
     set PIPENV_DONT_LOAD_ENV=1
     pipenv install --dev
@@ -254,3 +265,35 @@ pre-commit install || (
 )
 
 exit /b 1
+
+
+:unset_proxy
+
+echo.
+echo "Unsetting Proxy"
+echo.
+
+echo "Environment variables before unsetting: "
+echo "HTTP_PROXY: %HTTP_PROXY%"
+echo "HTTPS_PROXY: %HTTPS_PROXY%"
+
+if defined HTTPS_PROXY (
+    echo "The environment variable HTTPS_PROXY is set for using proxy, unsetting.."
+    set "HTTPS_PROXY="
+)
+if defined HTTP_PROXY (
+    echo "The environment variable HTTP_PROXY is set for using proxy, unsetting.."
+    set "HTTP_PROXY="
+)
+
+@REM set "PIPENV_DONT_LOAD_ENV=1"
+@REM set "HTTPS_PROXY="
+@REM set "HTTP_PROXY="
+set "PIPENV_DOTENV_LOCATION=.env"
+set "PIPENV_DONT_LOAD_ENV=1"
+
+echo "Environment variables after unsetting: "
+echo "HTTP_PROXY: %HTTP_PROXY%"
+echo "HTTPS_PROXY: %HTTPS_PROXY%"
+
+exit /b
