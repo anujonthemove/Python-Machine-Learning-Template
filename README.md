@@ -12,7 +12,8 @@
 [![Windows](https://img.shields.io/badge/Windows-blue?style=flat-square&logo=windows11)]()
 
 
-The Python Machine Learning Template is designed to provide a comprehensive structure for end-to-end **Machine Learning** projects in Python. Whether you're working on ***Computer Vision***, ***Natural Language Processing***, ***Reinforcement Learning***, or ***traditional Machine Learning/Data Science***, this template offers a simple and intuitive way to organize and manage your project.
+The Python Machine Learning Template is designed to provide a comprehensive structure for end-to-end
+**Machine Learning** projects in Python. Whether you're working on ***Computer Vision***, ***Natural Language Processing***, ***Reinforcement Learning***, or ***traditional Machine Learning/Data Science***, this template offers a simple and intuitive way to organize and manage your project.
 
 
 <a href="https://github.com/anujonthemove/Python-Machine-Learning-Template/generate"><img src="https://raw.githubusercontent.com/anujonthemove/Python-Machine-Learning-Template/main/.assets/images/do-not-clone_fork-click-this-button-to-use-the-template.svg" alt="click this button to use the template"></a>
@@ -22,6 +23,7 @@ To get started, simply click on the above button 👆 or <b><font color="red">"U
 <a href="https://www.anujonthemove.com/Software-Engineering-Handbook/python-machine-learning-template/"><img src="https://raw.githubusercontent.com/anujonthemove/Python-Machine-Learning-Template/main/.assets/images/check-detailed-documentation-here.svg" alt="check detailed documentation here"></a>
 
 </div>
+
 
 The following sections provide an overview of the directory structure and instructions for setting up your project workspace.
 
@@ -319,6 +321,13 @@ All the packages to be installed are included in the Pipfile. For installing add
 ```
 </details>
 
+
+## 🌟 Star Us
+If you find our project useful, please consider giving it a star on GitHub. 🤩
+
+It motivates us to continue improving and adding new features. 💪
+
+Thank you for your support ❤️
 
 ## 👥 Authors
 
