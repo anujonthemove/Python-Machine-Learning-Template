@@ -198,6 +198,17 @@ clean_repo() {
     else
         echo "❌ CONTRIBUTING.md file not found. Skipping removal"
     fi
+
+    # Remove CONTRIBUTING.md file if it exists
+    if [ -f "FUNDING.yml" ]; then
+        echo "📄 Removing FUNDING.yml file"
+        rm FUNDING.yml || { echo "❌ Failed to remove FUNDING.yml file"; return 1; }
+    else
+        echo "❌ FUNDING.yml file not found. Skipping removal"
+    fi
+
+
+
 }
 
 # Function to display help in red color
