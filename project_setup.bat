@@ -236,6 +236,11 @@ if exist "CONTRIBUTING.md" (
     del /f "CONTRIBUTING.md"
 )
 
+REM Check if the FUNDING.yml file exists before removing it
+if exist "FUNDING.yml" (
+    del /f "FUNDING.yml"
+)
+
 exit /b
 
 :remove_cache
