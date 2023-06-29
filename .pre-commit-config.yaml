@@ -1,9 +1,15 @@
 repos:
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.0.1
-  hooks:
-  - id: check-added-large-files
-    name: Check for large files
-    description: Prevents large files from being committed
-    entry: check-added-large-files
-    args: [--maxkb=5120]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+    - id: check-added-large-files
+      name: Check for large files
+      description: Prevents large files from being committed
+      entry: check-added-large-files
+      args: [--maxkb=5120]
+
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.6.1
+    hooks:
+      - id: nbstripout
+
