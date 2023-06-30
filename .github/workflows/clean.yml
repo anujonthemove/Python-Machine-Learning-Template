@@ -1,0 +1,53 @@
+name: first-time-setup
+run-name: first time setup of repo
+
+on:
+  # run when branch created (repo generated from template)
+  create:
+
+# only keep latest run of this workflow
+concurrency:
+  group: first-time-setup
+  cancel-in-progress: true
+
+permissions: 
+  # Give all permissions
+  actions: write
+  checks: write
+  contents: write
+
+  
+jobs:
+  first-time-setup:
+    # ensure run only once, when repo generated
+    if: github.run_number == 1
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # get main branch repo contents
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # remove files not needed for user instance of template
+      - name: Remove unneeded files
+        run: rm -f README.md FUNDING.yml
+
+      # personalize readme for user
+      - name: Init readme
+        run: |
+          echo "
+   
+          # ${{ github.event.repository.name }}
+
+          " > README.md
+
+      # save changed files
+      - name: Commit changed files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Setup repo"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
