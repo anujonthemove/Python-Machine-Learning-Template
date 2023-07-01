@@ -60,6 +60,6 @@ jobs:
       - name: Commit changed files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Setup repo"
+          commit_message: "Initial commit"
         env:
           GITHUB_TOKEN: ${{ github.token }}
