@@ -1,5 +1,17 @@
-name: first-time-setup
-run-name: first time setup of repo
+# --------------------------------------------------------------------------------
+# Author: Anuj Khandelwal
+# Date: 2023-07-01
+# Credits: https://github.com/orgs/community/discussions/22183#discussioncomment-4585507
+# Description:
+# This workflow is used for the first time setup of the repository. It is triggered
+# when you create a new repository using this template.
+# The workflow removes unwanted files and folders from your project.
+# It also clears up the README for the user. It only runs once when the
+# repository is generated.
+# --------------------------------------------------------------------------------
+
+name: Repository-Cleanup
+run-name: Clean up repository
 
 on:
   # run when branch created (repo generated from template)
@@ -7,31 +19,41 @@ on:
 
 # only keep latest run of this workflow
 concurrency:
-  group: first-time-setup
+  group: Repository-Cleanup
   cancel-in-progress: true
 
-permissions: 
-  # Give all permissions
+permissions:
+  # give all permissions
   actions: write
   checks: write
   contents: write
+  deployments: write
+  issues: write
+  packages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: write
+  statuses: write
 
-  
 jobs:
-  first-time-setup:
+  Repository-Cleanup:
     # ensure run only once, when repo generated
     if: github.run_number == 1
 
     runs-on: ubuntu-latest
 
     steps:
-      # get main branch repo contents
+      # get main branch repository contents
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      # remove files not needed for user instance of template
+      # remove unwanted folders
+      - name: Remove .assets folder
+        run: rm -rf .assets
+
+      # remove unwanted files
       - name: Remove unneeded files
         run: rm -f README.md FUNDING.yml
 
@@ -39,7 +61,7 @@ jobs:
       - name: Init readme
         run: |
           echo "
-   
+
           # ${{ github.event.repository.name }}
 
           " > README.md
@@ -48,6 +70,6 @@ jobs:
       - name: Commit changed files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Setup repo"
+          commit_message: "Initial commit"
         env:
           GITHUB_TOKEN: ${{ github.token }}
