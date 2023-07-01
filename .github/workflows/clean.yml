@@ -35,9 +35,11 @@ jobs:
       # get main branch repo contents
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
+        #with:
           # repo-token: ${{ secrets.GITHUB_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          #repo-token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }} 
       
       # remove files not needed for user instance of template
       - name: Remove unneeded folders
